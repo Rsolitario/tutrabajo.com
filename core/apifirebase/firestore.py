@@ -27,8 +27,8 @@ class Firestore(object):
         ref.set(datos)
 
     # falta agregar id en la collection
-    def escribirAdd(self, collection, data) -> None:
-        doc = self.db.collection(collection)
+    def escribirAdd(self, document, collection, data) -> None:
+        doc = self.db.document(document).collection(collection)
         doc.add(data)
 
     # Obtén todos los documentos de una colección
@@ -135,3 +135,20 @@ class Firestore(object):
 
     def deleteDocumentinCollections(self, collection, documente, collection1, document1):
         self.db.collection(collection).document(documente).collection(collection1).document(document1).delete()
+    
+    def updateCollections(self, collection, document, collection1, document1, data):
+        doc_ref = self.db.collection(collection).document(document).collection(collection1).document(document1)
+        doc_ref.update(data)
+
+        # escritura de tercer nivel
+    def write_collections_3(self,
+                            collection,
+                            document,
+                            collection1,
+                            documention1,
+                            collection2,
+                            documention2,
+                            data):
+        doc_ref = self.db.collection(collection).document(document) \
+            .collection(collection1).document(documention1)         \
+            .collection(collection2).document(documention2).set(data)

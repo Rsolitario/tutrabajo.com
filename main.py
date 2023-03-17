@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import users, bounding, post
+import users, bounding, post, bid
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
@@ -19,6 +19,7 @@ app.include_router(users.router)
 #app.include_router(libros.router)
 app.include_router(bounding.router)
 app.include_router(post.router)
+app.include_router(bid.router)
 
 app.mount("/static", StaticFiles(directory="static"),
                                  name="static")
